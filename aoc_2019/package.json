@@ -1,0 +1,7 @@
+{
+  "name": "aoc_2019",
+  "version": "1.0.0",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
