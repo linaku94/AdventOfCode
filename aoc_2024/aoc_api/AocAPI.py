@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 class AocAPI:
-    def __init__(self, year, day):
+    def __init__(self, year: int, day: int):
         load_dotenv()
         self.token = os.getenv('AOC_TOKEN')
         self.aoc_base_url = 'https://adventofcode.com'
@@ -44,15 +44,15 @@ class AocAPI:
     def post_solution(self, part: int, solution: str):
         return self._request(path=f'{self.year}/day/{self.day}/answer', data=f'level={part}&answer={solution}', method='POST')
 
-    def get_input(self, filename: str='input.txt') -> str:
+    def get_input(self, filename: str='input.txt') -> list[str]:
         input_path = os.path.join(os.getcwd(), filename)
         if not os.path.isfile(input_path):
             input_content = self._request(path=f'{self.year}/day/{self.day}/input', method='GET')
             with open(input_path, 'x') as file:
                 file.write(input_content)
-            return input_content
+            return input_content.split('\n')
         else:
             with open(input_path, 'r') as file:
-                return file.read()
+                return file.readlines()
 
 
